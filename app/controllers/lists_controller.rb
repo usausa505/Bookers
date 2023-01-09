@@ -8,9 +8,10 @@ class ListsController < ApplicationController
     list = List.new(list_params)
     # 3. データをデータベースに保存するためのsaveメソッド実行
     list.save
-     # 詳細画面へリダイレクト
+    # 詳細画面へリダイレクト
     redirect_to list_path(list.id)
   end
+
 
   def index
     @lists = List.all
@@ -28,6 +29,12 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
     list.update(list_params)
     redirect_to list_path(list.id)
+  end
+
+  def destroy
+    list = List.find(params[:id])
+    list.destroy
+    redirect_to '/lists'
   end
 
   private
